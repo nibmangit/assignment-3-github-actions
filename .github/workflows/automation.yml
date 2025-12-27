@@ -1,24 +1,22 @@
-name: Auto Label Pull Requests
+name: Automation Demo
 
 on:
   pull_request:
     types: [opened]
- 
-permissions:
-  issues: write
 
 jobs:
-  label:
+  demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Add label to pull request
-        uses: actions/github-script@v7
+      - name: Print message
+        run: echo "Automation workflow triggered successfully"
+
+      - name: Create demo file
+        run: echo "Workflow triggered!" > demo.txt
+
+      - name: Upload demo artifact
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['automation']
-            })
+          name: demo-artifact
+          path: demo.txt
