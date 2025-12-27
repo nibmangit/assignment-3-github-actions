@@ -3,6 +3,9 @@ name: Auto Label Pull Requests
 on:
   pull_request:
     types: [opened]
+ 
+permissions:
+  issues: write
 
 jobs:
   label:
